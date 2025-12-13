@@ -1,0 +1,16 @@
+# Bỏ qua file hệ thống của Visual Studio
+.vs/
+.vscode/
+
+# Bỏ qua file build rác của .NET
+bin/
+obj/
+*.user
+
+# Bỏ qua thư viện nặng của Angular
+node_modules/
+dist/
+.angular/
+
+# File cấu hình môi trường (chứa mật khẩu)
+.env
