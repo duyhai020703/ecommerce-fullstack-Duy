@@ -27,5 +27,19 @@ namespace WebCuaDuy.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpDelete("{id}")] // ⚠️ QUAN TRỌNG: Phải có ("{id}") để khớp với URL api/Product/xxxx
+        public async Task<IActionResult> Delete(string id) // ⚠️ Lưu ý: MongoDB dùng string id, không phải int
+        {
+            var isDeleted = await _service.DeleteAsync(id);
+
+            if (isDeleted)
+            {
+                return Ok(new { message = "Xóa thành công!" });
+            }
+            else
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm này để xóa." });
+            }
+        }
     }
 }

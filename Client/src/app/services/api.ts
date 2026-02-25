@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class Api {
   // ⚠️ LƯU Ý: Thay số 7113 bằng số port trong link Swagger của bạn
   // Ví dụ: https://localhost:5024/api/products
-  private apiUrl = 'https://localhost:7113/api/Products';
+  private apiUrl = 'https://localhost:7113/api/Product';
 
   constructor(private http: HttpClient) { }
 

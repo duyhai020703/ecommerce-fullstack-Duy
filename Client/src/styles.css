@@ -1,3 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
 
-@import "tailwindcss";
+:root {
+  --mlb-black: #000000;
+  --mlb-white: #ffffff;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--mlb-black);
+  background-color: var(--mlb-white);
+  overflow-x: hidden;
+}
+
+/* Font tiêu đề đặc trưng MLB */
+h1, h2, h3, h4, .btn {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Utility ẩn thanh cuộn nhưng vẫn cho trượt */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

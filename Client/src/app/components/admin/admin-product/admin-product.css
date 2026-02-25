@@ -1,0 +1,15 @@
+.product-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover; /* Giữ ảnh vuông vức không bị méo */
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Hiệu ứng hover cho hàng */
+table tbody tr:hover {
+  background-color: #f8f9fa;
+}

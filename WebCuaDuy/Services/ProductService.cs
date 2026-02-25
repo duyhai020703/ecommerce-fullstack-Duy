@@ -25,6 +25,13 @@ namespace WebCuaDuy.Services
 
         public async Task CreateAsync(Product product)
         {
+            // 1. Logic tạo Slug tự động
+            if (string.IsNullOrEmpty(product.Slug))
+            {
+                // Ví dụ: "Áo Thun Mùa Hè" -> "ao-thun-mua-he"
+                // (Đây là cách đơn giản, thực tế nên dùng thư viện để bỏ dấu tiếng Việt)
+                product.Slug = product.Name.ToLower().Replace(" ", "-");
+            }
             // CHECK 1: Validate CategoryId
             bool catExists = await _categoryService.ExistsAsync(product.CategoryId);
             if (!catExists) throw new Exception("Danh mục không tồn tại!");
@@ -38,6 +45,15 @@ namespace WebCuaDuy.Services
 
             product.CreatedAt = DateTime.UtcNow;
             await _products.InsertOneAsync(product);
+        }
+        // 👇 THÊM HÀM NÀY VÀO
+        public async Task<bool> DeleteAsync(string id)
+        {
+            // Tìm và xóa sản phẩm có Id trùng khớp
+            var result = await _products.DeleteOneAsync(product => product.Id == id);
+
+            // Trả về True nếu xóa được ít nhất 1 dòng, False nếu không tìm thấy ID
+            return result.DeletedCount > 0;
         }
     }
 }

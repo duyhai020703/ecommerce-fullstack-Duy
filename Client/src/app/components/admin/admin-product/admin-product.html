@@ -1,0 +1,74 @@
+<h2 class="fw-bold mb-4">📦 Quản Lý Sản Phẩm</h2>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-white py-3">
+    <h5 class="mb-0 text-primary fw-bold"><i class="bi bi-plus-circle"></i> Thêm Sản Phẩm Mới</h5>
+  </div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" [(ngModel)]="newProduct.name" placeholder="Nhập tên sản phẩm...">
+      </div>
+      
+      <div class="col-md-6">
+        <label class="form-label">Giá bán (VNĐ)</label>
+        <input type="number" class="form-control" [(ngModel)]="newProduct.price">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Link Ảnh (URL)</label>
+        <input type="text" class="form-control" [(ngModel)]="newProduct. imageUrl" placeholder="https://...">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Danh mục <span class="text-danger">*</span></label>
+        <select class="form-select" [(ngModel)]="newProduct.categoryId">
+          <option [ngValue]="0" disabled selected>-- Chọn danh mục --</option>
+          <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+
+      <div class="col-12 mt-4 text-end">
+        <button class="btn btn-success px-5" (click)="addProduct()">
+          <i class="bi bi-save"></i> Lưu Sản Phẩm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-0">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th class="ps-4">Hình ảnh</th>
+          <th>Tên Sản Phẩm</th>
+          <th>Giá Tiền</th>
+          <th>Danh Mục</th>
+          <th class="text-end pe-4">Hành Động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td class="ps-4">
+            <img [src]="p. imageUrl" class="product-thumb rounded border">
+            <!-- || 'https://via.placeholder.com/60 -->
+                 
+          </td>
+          <td class="fw-bold">{{ p.name }}</td>
+          <td class="text-danger fw-bold">{{ p.price | number }} ₫</td>
+          <td>
+            <span class="badge bg-light text-dark border">{{ getCategoryName(p.categoryId) }}</span>
+          </td>
+          <td class="text-end pe-4">
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteProduct(p.id)">
+              <i class="bi bi-trash"></i> Xóa
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

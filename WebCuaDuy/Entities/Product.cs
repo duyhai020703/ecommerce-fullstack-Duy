@@ -12,13 +12,13 @@ namespace WebCuaDuy.Entities // Hoặc namespace EcommerceAPI.Entities tùy tên
         public required string Name { get; set; }
 
         // URL thân thiện cho SEO (vd: ao-thun-coolmate)
-        public string Slug { get; set; }
+        public string? Slug { get; set; }
 
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal Price { get; set; }
 
         public string? Description { get; set; }
-        public string? ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
         // Liên kết sang bảng Category
         [BsonRepresentation(BsonType.ObjectId)]

@@ -1,0 +1,26 @@
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.main-content {
+  overflow-y: auto; /* Cho phép cuộn nội dung nếu dài */
+}
+
+.nav-link {
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateX(5px);
+}
+
+/* Màu khi đang chọn menu đó */
+.nav-link.active {
+  background: #0d6efd; /* Màu xanh Bootstrap */
+  color: white !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}

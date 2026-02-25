@@ -1,0 +1,19 @@
+<section class="py-5 bg-white">
+  <div class="container-fluid px-5">
+    
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <h2 class="display-5 fw-bold text-uppercase">Hàng Mới Về</h2>
+      <div class="d-flex gap-3">
+        <button class="btn btn-outline-dark rounded-0 active">QUẦN ÁO</button>
+        <button class="btn btn-outline-dark rounded-0 border-0">PHỤ KIỆN</button>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-6 col-md-3" *ngFor="let p of newProducts">
+        <app-product-item [product]="p"></app-product-item>
+      </div>
+    </div>
+
+  </div>
+</section>

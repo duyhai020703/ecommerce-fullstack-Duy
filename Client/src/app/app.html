@@ -1,17 +1,64 @@
-<div style="padding: 20px; font-family: sans-serif;">
-  <h1 style="color: blue; text-align: center;">Danh Sách Sản Phẩm</h1>
+<div class="bg-black text-white text-center py-2 small fw-bold">
+  FREE SHIPPING TOÀN QUỐC CHO ĐƠN HÀNG TỪ 2.000.000Đ 🚀
+</div>
 
-  <div *ngIf="products.length === 0" style="text-align: center; color: gray;">
-    Đang tải dữ liệu... (Nếu lâu quá hãy kiểm tra lại Server)
-  </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom py-3">
+  <div class="container-fluid px-4"> <a class="navbar-brand fs-2 fw-bold" href="#">
+      MLB <span class="text-secondary" style="font-size: 0.5em;">VIETNAM</span>
+    </a>
 
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-    
-    <div *ngFor="let p of products" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
-      <h3>{{ p.name }}</h3>
-      <p>Loại: {{ p.category }}</p>
-      <p style="color: red; font-weight: bold;">Giá: {{ p.price | number }} đ</p>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav gap-4 fw-bold fs-5">
+        <li class="nav-item"><a class="nav-link" routerLink="/shop">Apparel</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/shop">Footwear</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/shop">Accessories</a></li>
+        <li class="nav-item"><a class="nav-link text-danger" routerLink="/shop">Sale</a></li>
+      </ul>
     </div>
 
+    <div class="d-flex gap-3 align-items-center">
+      <a routerLink="/login" class="fs-4"><i class="bi bi-person"></i></a>
+      <a routerLink="/shop" class="fs-4 position-relative">
+        <i class="bi bi-bag"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">
+          2
+        </span>
+      </a>
+    </div>
   </div>
-</div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-black text-white py-5 mt-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h4 class="mb-4">Về Chúng Tôi</h4>
+        <p class="text-secondary small">MLB Vietnam - Phong cách bóng chày Major League Baseball kết hợp thời trang đường phố.</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="mb-4">Hỗ Trợ</h4>
+        <ul class="list-unstyled text-secondary">
+          <li class="mb-2"><a href="#">Chính sách đổi trả</a></li>
+          <li class="mb-2"><a href="#">Bảng size</a></li>
+          <li class="mb-2"><a href="#">Kiểm tra đơn hàng</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4 class="mb-4">Đăng Ký Nhận Tin</h4>
+        <div class="input-group">
+          <input type="text" class="form-control rounded-0" placeholder="Email của bạn...">
+          <button class="btn btn-light rounded-0 fw-bold">GỬI</button>
+        </div>
+      </div>
+    </div>
+    <div class="border-top border-secondary mt-4 pt-4 text-center text-secondary small">
+      © 2026 MLB Vietnam Clone by Duy. All rights reserved.
+    </div>
+  </div>
+</footer>

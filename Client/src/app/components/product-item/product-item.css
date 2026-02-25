@@ -1,0 +1,25 @@
+.img-box {
+  padding-top: 100%; /* Tạo khung vuông tỉ lệ 1:1 */
+}
+
+.main-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease;
+}
+
+/* Hiệu ứng Zoom ảnh khi hover */
+.product-card:hover .main-img {
+  transform: scale(1.05);
+}
+
+/* Hiệu ứng nút trượt lên */
+.quick-add-btn {
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .quick-add-btn {
+  transform: translateY(0);
+}

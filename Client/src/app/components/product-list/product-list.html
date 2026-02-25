@@ -1,0 +1,16 @@
+<section class="bg-black text-white py-5">
+  <div class="container-fluid px-5">
+    
+    <div class="d-flex justify-content-between align-items-end mb-4 border-bottom border-secondary pb-3">
+      <h2 class="fw-bold m-0">BEST SELLERS</h2>
+      <a href="#" class="text-white small text-decoration-none">XEM TẤT CẢ</a>
+    </div>
+
+    <div class="d-flex gap-4 overflow-auto no-scrollbar pb-3">
+      <div style="min-width: 280px; width: 22%;" *ngFor="let p of products">
+        <app-product-item [product]="p"></app-product-item>
+      </div>
+    </div>
+
+  </div>
+</section>

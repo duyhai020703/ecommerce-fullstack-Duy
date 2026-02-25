@@ -1,0 +1,24 @@
+<section class="container-fluid px-0">
+  <div class="row g-0">
+    <div class="col-lg-6 position-relative">
+      <img src="https://image.msscdn.net/images/style/detail/34686/detail_34686_1_500.jpg" 
+           class="w-100 h-100 object-fit-cover" style="min-height: 600px;" alt="Lookbook">
+      
+      <div class="overlay position-absolute bottom-0 start-0 w-100 p-5 text-white">
+        <h3 class="display-4 fw-bold">WINTER MIX</h3>
+        <p class="fs-5">Phong cách đường phố mùa lễ hội</p>
+      </div>
+    </div>
+
+    <div class="col-lg-6 bg-light d-flex align-items-center">
+      <div class="p-5 w-100">
+        <h4 class="fw-bold mb-4 ps-3 border-start border-4 border-dark">SẢN PHẨM TRONG HÌNH</h4>
+        <div class="row g-3">
+          <div class="col-6 col-md-4" *ngFor="let item of items">
+            <app-product-item [product]="item"></app-product-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

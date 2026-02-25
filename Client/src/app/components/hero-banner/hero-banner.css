@@ -1,0 +1,17 @@
+.hero-img {
+  filter: brightness(0.7); /* Làm tối ảnh để chữ nổi bật */
+}
+
+/* Animation chữ bay lên */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUpAnim 0.8s forwards ease-out;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+@keyframes fadeUpAnim {
+  to { opacity: 1; transform: translateY(0); }
+}

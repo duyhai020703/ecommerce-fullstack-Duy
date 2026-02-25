@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: -50px;">
+  <div class="login-card p-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-dark">Chào mừng trở lại! 👋</h2>
+      <p class="text-muted">Vui lòng đăng nhập để tiếp tục</p>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-medium text-secondary">Email</label>
+      <input type="email" class="form-control form-control-lg bg-light border-0" 
+             [(ngModel)]="email" placeholder="name@example.com">
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label fw-medium text-secondary">Mật khẩu</label>
+      <input type="password" class="form-control form-control-lg bg-light border-0" 
+             [(ngModel)]="password" placeholder="••••••••">
+    </div>
+
+    <button class="btn btn-primary w-100 btn-lg mb-3" (click)="onLogin()">
+      Đăng Nhập Ngay
+    </button>
+
+    <div class="text-center">
+      <small class="text-muted">Chưa có tài khoản? <a href="#" class="text-decoration-none fw-bold" style="color: var(--primary-color)">Đăng ký</a></small>
+    </div>
+  </div>
+</div>

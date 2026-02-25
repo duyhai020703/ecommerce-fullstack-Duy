@@ -1,0 +1,18 @@
+/* Chỉ cần chỉnh chút cho nút bấm đẹp hơn */
+.btn-outline-secondary {
+  color: #aaa;
+  border-color: #444;
+}
+
+.btn-outline-secondary:hover {
+  color: white;
+  border-color: white;
+  background: transparent;
+}
+
+/* Responsive: Trên mobile thì ảnh mẫu nằm trên, sản phẩm nằm dưới */
+@media (max-width: 768px) {
+  .col-md-5 {
+    height: 400px; /* Giới hạn chiều cao ảnh trên mobile */
+  }
+}

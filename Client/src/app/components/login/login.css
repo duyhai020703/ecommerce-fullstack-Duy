@@ -1,0 +1,12 @@
+.login-card {
+  background: white;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 20px; /* Bo góc tròn trịa */
+  box-shadow: var(--card-shadow); /* Bóng đổ xịn */
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px); /* Hiệu ứng bay lên nhẹ */
+}
