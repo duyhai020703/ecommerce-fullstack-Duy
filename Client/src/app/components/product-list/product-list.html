@@ -1,16 +1,76 @@
-<section class="bg-black text-white py-5">
-  <div class="container-fluid px-5">
+<section class="bg-white text-black py-5">
+  <div class="container-fluid px-lg-5">
     
     <div class="d-flex justify-content-between align-items-end mb-4 border-bottom border-secondary pb-3">
-      <h2 class="fw-bold m-0">BEST SELLERS</h2>
-      <a href="#" class="text-white small text-decoration-none">XEM TẤT CẢ</a>
-    </div>
-
-    <div class="d-flex gap-4 overflow-auto no-scrollbar pb-3">
-      <div style="min-width: 280px; width: 22%;" *ngFor="let p of products">
-        <app-product-item [product]="p"></app-product-item>
+      <div>
+        <h2 class="fw-bold m-0 tracking-tighter">BEST SELLERS</h2>
+        <p class="text-secondary small m-0">Những sản phẩm được yêu thích nhất mùa này</p>
       </div>
+      <a href="#" class="text-white-50 small text-decoration-none hover-white">XEM TẤT CẢ &rarr;</a>
     </div>
 
+    <div class="d-flex flex-wrap gap-2 mb-4">
+      <button (click)="filterByCategory('Quần áo')" 
+              [class.active]="currentCategory === 'Quần áo'"
+              class="btn btn-sm btn-outline-light rounded-pill px-4 fw-bold text-uppercase category-btn-dark">
+        Quần áo
+      </button>
+      <button (click)="filterByCategory('Túi')" 
+              [class.active]="currentCategory === 'Túi'"
+              class="btn btn-sm btn-outline-light rounded-pill px-4 fw-bold text-uppercase category-btn-dark">
+        Túi
+      </button>
+      <button (click)="filterByCategory('Phụ kiện')" 
+              [class.active]="currentCategory === 'Phụ kiện'"
+              class="btn btn-sm btn-outline-light rounded-pill px-4 fw-bold text-uppercase category-btn-dark">
+        Phụ kiện
+      </button>
+      <button (click)="filterByCategory('Giày')" 
+              [class.active]="currentCategory === 'Giày'"
+              class="btn btn-sm btn-outline-light rounded-pill px-4 fw-bold text-uppercase category-btn-dark">
+        Giày
+      </button>
+    </div>
+
+    <div class="d-flex gap-4 overflow-auto no-scrollbar pb-4 custom-scroll">
+      
+      <div class="col-12 py-5 text-center text-secondary" *ngIf="!filteredItems || filteredItems.length === 0">
+        <div class="spinner-border spinner-border-sm mb-2" role="status"></div>
+        <p class="italic">Đang tìm kiếm các siêu phẩm {{ currentCategory }}...</p>
+      </div>
+
+      <div style="min-width: 280px; width: 22%;" *ngFor="let item of filteredItems">
+        <app-product-item [product]="item"></app-product-item>
+      </div>
+
+    </div>
   </div>
 </section>
+<style>
+  /* Giữ các style cũ của bạn */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .custom-scroll { scroll-behavior: smooth; }
+  .hover-white:hover { color: white !important; transition: 0.3s; }
+  .tracking-tighter { letter-spacing: -1px; }
+
+  /* Style mới cho nút trên nền đen */
+  .category-btn-dark {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    transition: all 0.3s ease;
+  }
+
+  .category-btn-dark:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+
+  .category-btn-dark.active {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-color: #fff !important;
+  }
+</style>

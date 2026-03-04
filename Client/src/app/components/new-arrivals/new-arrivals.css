@@ -16,3 +16,24 @@
     height: 400px; /* Giới hạn chiều cao ảnh trên mobile */
   }
 }
+/* Style cho nút danh mục */
+.category-btn {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  border-color: #ddd; /* Viền mờ khi chưa chọn */
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+/* Khi nút được chọn (Active) */
+.category-btn.active {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+}
+
+/* Hiệu ứng hover nhẹ */
+.category-btn:hover:not(.active) {
+  background-color: #f8f9fa;
+  border-color: #000;
+}

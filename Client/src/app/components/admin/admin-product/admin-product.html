@@ -2,36 +2,91 @@
 
 <div class="card border-0 shadow-sm mb-4">
   <div class="card-header bg-white py-3">
-    <h5 class="mb-0 text-primary fw-bold"><i class="bi bi-plus-circle"></i> Thêm Sản Phẩm Mới</h5>
+    <h5 class="mb-0 text-primary fw-bold">
+      <i class="bi bi-plus-circle"></i> {{ isEditMode ? 'Cập Nhật Sản Phẩm' : 'Thêm Sản Phẩm Mới' }}
+    </h5>
   </div>
   <div class="card-body">
     <div class="row g-3">
-      <div class="col-md-6">
-        <label class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" [(ngModel)]="newProduct.name" placeholder="Nhập tên sản phẩm...">
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Tên sản phẩm <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" [(ngModel)]="newProduct.name" placeholder="Ví dụ: Áo thun MLB">
       </div>
       
-      <div class="col-md-6">
-        <label class="form-label">Giá bán (VNĐ)</label>
-        <input type="number" class="form-control" [(ngModel)]="newProduct.price">
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Link Ảnh (URL)</label>
-        <input type="text" class="form-control" [(ngModel)]="newProduct. imageUrl" placeholder="https://...">
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Danh mục <span class="text-danger">*</span></label>
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Danh mục <span class="text-danger">*</span></label>
         <select class="form-select" [(ngModel)]="newProduct.categoryId">
-          <option [ngValue]="0" disabled selected>-- Chọn danh mục --</option>
+          <option [ngValue]="0" disabled>-- Chọn danh mục --</option>
           <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
         </select>
       </div>
 
-      <div class="col-12 mt-4 text-end">
-        <button class="btn btn-success px-5" (click)="addProduct()">
-          <i class="bi bi-save"></i> Lưu Sản Phẩm
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Giá cơ bản (Hiển thị)</label>
+        <input type="number" class="form-control" [(ngModel)]="newProduct.basePrice" placeholder="0">
+      </div>
+
+      <div class="col-md-12">
+        <label class="form-label fw-bold">Link Ảnh (URL)</label>
+        <input type="text" class="form-control" [(ngModel)]="newProduct.imageUrl" placeholder="https://...">
+      </div>
+
+      <div class="col-12 mt-3">
+        <label class="form-label fw-bold text-secondary">Nhãn sản phẩm:</label>
+        <div class="d-flex gap-3 flex-wrap border p-2 rounded bg-light">
+          <div class="form-check" *ngFor="let lb of availableLabels">
+            <input class="form-check-input" type="checkbox" [id]="'lb-'+lb" 
+                   [checked]="newProduct.labels?.includes(lb)" (change)="toggleLabel(lb)">
+            <label class="form-check-label" [for]="'lb-'+lb">{{ lb }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <label class="form-label fw-bold text-primary"><i class="bi bi-grid-3x3-gap"></i> Biến thể (Size/Màu/Kho)</label>
+          <button class="btn btn-sm btn-primary" (click)="addVariant()">
+            <i class="bi bi-plus-lg"></i> Thêm biến thể
+          </button>
+        </div>
+
+        <div class="table-responsive border rounded shadow-sm">
+          <table class="table table-sm align-middle mb-0 bg-white">
+            <thead class="bg-light">
+              <tr class="small text-muted">
+                <th class="ps-3">Màu sắc</th>
+                <th>Kích cỡ</th>
+                <th>Giá riêng</th>
+                <th>Tồn kho</th>
+                <th>SKU</th>
+                <th class="text-center">Xóa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let v of newProduct.variants; let i = index">
+                <td class="ps-3"><input type="text" class="form-control form-control-sm" [(ngModel)]="v.color" placeholder="Đen"></td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="v.size" placeholder="L"></td>
+                <td><input type="number" class="form-control form-control-sm" [(ngModel)]="v.price" placeholder="0"></td>
+                <td><input type="number" class="form-control form-control-sm" [(ngModel)]="v.stock" placeholder="10"></td>
+                <td><input type="text" class="form-control form-control-sm" [(ngModel)]="v.sku" placeholder="SKU01"></td>
+                <td class="text-center">
+                  <button class="btn btn-link text-danger p-0" (click)="removeVariant(i)">
+                    <i class="bi bi-x-circle-fill"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="newProduct.variants?.length === 0">
+                <td colspan="6" class="text-center text-muted py-3 small">Chưa có biến thể nào.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-12 mt-4 text-end border-top pt-3">
+        <button *ngIf="isEditMode" class="btn btn-light me-2" (click)="resetForm()">Hủy</button>
+        <button class="btn btn-success px-5" (click)="saveProduct()">
+          <i class="bi bi-check-lg"></i> {{ isEditMode ? 'Cập Nhật' : 'Lưu Sản Phẩm' }}
         </button>
       </div>
     </div>
@@ -44,27 +99,42 @@
       <thead class="table-dark">
         <tr>
           <th class="ps-4">Hình ảnh</th>
-          <th>Tên Sản Phẩm</th>
-          <th>Giá Tiền</th>
-          <th>Danh Mục</th>
+          <th>Sản Phẩm</th>
+          <th>Giá (Cơ bản)</th>
+          <th>Phân loại</th>
           <th class="text-end pe-4">Hành Động</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let p of products">
           <td class="ps-4">
-            <img [src]="p. imageUrl" class="product-thumb rounded border">
-            <!-- || 'https://via.placeholder.com/60 -->
-                 
+            <img [src]="p.imageUrl || 'https://via.placeholder.com/50'" class="rounded border" style="width: 50px; height: 50px; object-fit: cover;">
           </td>
-          <td class="fw-bold">{{ p.name }}</td>
-          <td class="text-danger fw-bold">{{ p.price | number }} ₫</td>
+          <td>
+            <div class="fw-bold">{{ p.name }}</div>
+            <div class="d-flex gap-1 mt-1">
+              <span *ngFor="let lb of p.labels" class="badge bg-info text-dark" style="font-size: 10px;">{{ lb }}</span>
+            </div>
+          </td>
+          <td class="text-danger fw-bold"><ng-container *ngIf="p.variants && p.variants.length > 0; else noPrice">
+      <span *ngIf="getMinPrice(p) === getMaxPrice(p)">
+        {{ getMinPrice(p) | number }} ₫
+      </span>
+      <span *ngIf="getMinPrice(p) !== getMaxPrice(p)">
+        {{ getMinPrice(p) | number }} - {{ getMaxPrice(p) | number }} ₫
+      </span>
+    </ng-container>
+    <ng-template #noPrice>0 ₫</ng-template></td>
           <td>
             <span class="badge bg-light text-dark border">{{ getCategoryName(p.categoryId) }}</span>
+            <div class="small text-muted mt-1">{{ p.variants?.length || 0 }} biến thể</div>
           </td>
           <td class="text-end pe-4">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="editProduct(p)">
+              <i class="bi bi-pencil"></i>
+            </button>
             <button class="btn btn-sm btn-outline-danger" (click)="deleteProduct(p.id)">
-              <i class="bi bi-trash"></i> Xóa
+              <i class="bi bi-trash"></i>
             </button>
           </td>
         </tr>

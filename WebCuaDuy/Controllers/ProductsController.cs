@@ -41,5 +41,32 @@ namespace WebCuaDuy.Controllers
                 return NotFound(new { message = "Không tìm thấy sản phẩm này để xóa." });
             }
         }
+        // Thêm hàm này vào trong class ProductController
+        [HttpPut("{id}")] // URL sẽ có dạng: api/Product/697dc99...
+        public async Task<IActionResult> Update(string id, Product updatedProduct)
+        {
+            try
+            {
+                // Kiểm tra ID trong URL và ID trong object có khớp nhau không (bảo mật)
+                // Nếu object gửi lên chưa có ID, hãy gán ID từ URL vào
+                if (string.IsNullOrEmpty(updatedProduct.Id))
+                {
+                    updatedProduct.Id = id;
+                }
+
+                var existingProduct = await _service.GetByIdAsync(id);
+                if (existingProduct == null)
+                {
+                    return NotFound(new { message = "Không tìm thấy sản phẩm để cập nhật." });
+                }
+
+                await _service.UpdateAsync(id, updatedProduct);
+                return Ok(new { message = "Cập nhật sản phẩm thành công!", data = updatedProduct });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

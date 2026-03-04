@@ -16,10 +16,23 @@ namespace WebCuaDuy.Services
 
             _categoryService = categoryService;
         }
+        public async Task<List<Product>> GetAsync()
+        {
+            // 1. Lấy tất cả sản phẩm
+            var products = await _products.Find(_ => true).ToListAsync();
 
-        public async Task<List<Product>> GetAsync() =>
-            await _products.Find(_ => true).ToListAsync();
+            // 2. Gọi CategoryService để lấy tất cả danh mục
+            // (Giả sử bạn đã viết hàm GetAllAsync() bên CategoryService)
+            var categories = await _categoryService.GetAsync();
 
+            // 3. Khớp tên danh mục vào sản phẩm
+            foreach (var p in products)
+            {
+                p.CategoryName = categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name;
+            }
+
+            return products;
+        }
         public async Task<Product> GetByIdAsync(string id) =>
             await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -46,7 +59,34 @@ namespace WebCuaDuy.Services
             product.CreatedAt = DateTime.UtcNow;
             await _products.InsertOneAsync(product);
         }
-        // 👇 THÊM HÀM NÀY VÀO
+        // Thêm hàm này vào trong class ProductService
+        public async Task UpdateAsync(string id, Product updatedProduct)
+        {
+            // 1. Cập nhật lại Slug nếu tên sản phẩm thay đổi
+            if (!string.IsNullOrEmpty(updatedProduct.Name))
+            {
+                updatedProduct.Slug = updatedProduct.Name.ToLower().Replace(" ", "-");
+                // Bạn có thể dùng thư viện để bỏ dấu tiếng Việt chuẩn hơn ở đây
+            }
+
+            // 2. Kiểm tra CategoryId mới có hợp lệ không
+            bool catExists = await _categoryService.ExistsAsync(updatedProduct.CategoryId);
+            if (!catExists) throw new Exception("Danh mục không tồn tại!");
+
+            // 3. Đảm bảo các biến thể mới đều có SKU
+            if (updatedProduct.Variants != null)
+            {
+                foreach (var v in updatedProduct.Variants)
+                {
+                    if (string.IsNullOrEmpty(v.Sku))
+                        v.Sku = $"{updatedProduct.Slug}-{v.Color}-{v.Size}".ToUpper();
+                }
+            }
+
+            // 4. Thực hiện cập nhật vào MongoDB
+            // Lệnh này tìm bản ghi có Id cũ và thay bằng object updatedProduct mới
+            await _products.ReplaceOneAsync(p => p.Id == id, updatedProduct);
+        }
         public async Task<bool> DeleteAsync(string id)
         {
             // Tìm và xóa sản phẩm có Id trùng khớp

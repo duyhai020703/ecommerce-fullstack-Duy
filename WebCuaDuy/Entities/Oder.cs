@@ -27,5 +27,6 @@ namespace WebCuaDuy.Entities
         public decimal TotalAmount { get; set; } // Tổng tiền đơn hàng
 
         public string? Note { get; set; } // Ghi chú của khách
+        public List<string> Labels { get; set; } = new();
     }
 }

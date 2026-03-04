@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { ProductItemComponent } from '../product-item/product-item';
 
 @Component({
@@ -9,12 +10,63 @@ import { ProductItemComponent } from '../product-item/product-item';
   templateUrl: './product-list.html',
   styleUrls: ['./product-list.css']
 })
-export class ProductListComponent {
-  products = [
-    { name: 'Bigball Chunky A', price: 2390000, image: 'https://image.msscdn.net/images/goods_img/20220302/2393847/2393847_4_500.jpg' },
-    { name: 'Classic Monogram', price: 1890000, image: 'https://image.msscdn.net/images/goods_img/20210826/2088806/2088806_2_500.jpg' },
-    { name: 'NY Yankees Cap', price: 890000, image: 'https://image.msscdn.net/images/goods_img/20200818/1553932/1553932_1_500.jpg' },
-    { name: 'Chunky Liner High', price: 3590000, image: 'https://image.msscdn.net/images/goods_img/20220114/2307527/2307527_2_500.jpg' },
-    { name: 'Cross Bag Mini', price: 1590000, image: 'https://image.msscdn.net/images/goods_img/20230224/3110271/3110271_16772037494548_500.jpg' },
-  ];
+export class ProductListComponent implements OnInit {
+  allBestSellers: any[] = [];    // Lưu toàn bộ sản phẩm BestSeller từ API
+  filteredItems: any[] = [];     // Danh sách hiển thị sau khi lọc theo danh mục
+  currentCategory: string = 'Quần áo'; // Danh mục mặc định
+  
+  private apiUrl = 'https://localhost:7113/api/Product';
+
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.loadBestSellerProducts();
+  }
+
+  loadBestSellerProducts() {
+    this.http.get<any[]>(this.apiUrl).subscribe({
+      next: (data) => {
+        // 1. Lọc BestSeller một cách an toàn và map lại dữ liệu
+        this.allBestSellers = data.filter(product => 
+          product.labels && product.labels.some((l: string) => 
+            l.toLowerCase().replace(/\s/g, '') === 'bestseller'
+          )
+        ).map(product => ({
+          ...product,
+          image: product.imageUrl,
+          price: product.variants && product.variants.length > 0 ? product.variants[0].price : 0
+        }));
+
+        console.log("Tổng BestSellers đã tải:", this.allBestSellers.length);
+
+        // 2. Tự động lọc theo danh mục mặc định ngay khi có dữ liệu
+        this.filterByCategory(this.currentCategory);
+      },
+      error: (err) => console.error('Lỗi khi gọi API Best Sellers:', err)
+    });
+  }
+
+  filterByCategory(category: string) {
+    this.currentCategory = category;
+    
+    // Chuẩn hóa chuỗi tìm kiếm
+    const target = category.toLowerCase().trim();
+
+    this.filteredItems = this.allBestSellers.filter(p => {
+      // Ưu tiên khớp theo categoryName từ Backend
+      const catName = p.categoryName?.toLowerCase().trim() || '';
+      
+      // Hoặc khớp theo nhãn (labels)
+      const hasLabelMatch = p.labels && p.labels.some((l: string) => 
+        l.toLowerCase().trim() === target
+      );
+
+      return catName === target || hasLabelMatch;
+    });
+
+    console.log(`Lọc BestSellers [${category}]:`, this.filteredItems.length, "kết quả");
+
+    // Ép Angular cập nhật UI ngay lập tức (Xử lý lỗi F5 không load)
+    this.cdr.detectChanges();
+  }
 }

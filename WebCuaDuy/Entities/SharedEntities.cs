@@ -15,10 +15,12 @@ namespace WebCuaDuy.Entities
     // 2. Biến thể sản phẩm (Màu sắc, Size)
     public class ProductVariant
     {
-        public string Sku { get; set; } // Mã kho: Vd "AO-TRANG-L"
+        [BsonRepresentation(BsonType.Decimal128)]
+        public decimal Price { get; set; }
+        public string? Sku { get; set; } // Mã kho: Vd "AO-TRANG-L"
         public string Color { get; set; }
         public string Size { get; set; }
-        public int StockQuantity { get; set; } // Tồn kho của màu này
+        public int Stock { get; set; } // Tồn kho của màu này
     }
 
     // 3. Item trong Giỏ hàng (Chưa cần lưu giá, vì giá lấy theo thời gian thực)
