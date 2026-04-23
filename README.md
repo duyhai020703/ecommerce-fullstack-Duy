@@ -22,7 +22,7 @@ Server: Nginx (phục vụ Frontend)
 Remote Access: Cloudflare Tunnel / Ngrok
 
 🏗 Cấu trúc thư mục
-Plaintext
+
 WebCuaDuy/
 ├── Client/             # Mã nguồn Frontend Angular
 │   ├── Dockerfile      # Build ảnh Angular + Nginx
