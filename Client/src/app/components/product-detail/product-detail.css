@@ -1,0 +1,31 @@
+.size-btn {
+  width: 60px;
+  height: 50px;
+  border-radius: 0;
+  border-color: #eee;
+  font-weight: bold;
+}
+
+.size-btn:hover, .size-btn.active {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #000;
+}
+
+.w-fit-content {
+  width: fit-content;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+  color: #000;
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+h2 {
+  letter-spacing: -1px;
+}

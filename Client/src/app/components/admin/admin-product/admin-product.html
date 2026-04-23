@@ -13,17 +13,12 @@
         <input type="text" class="form-control" [(ngModel)]="newProduct.name" placeholder="Ví dụ: Áo thun MLB">
       </div>
       
-      <div class="col-md-4">
+      <div class="col-md-8">
         <label class="form-label fw-bold">Danh mục <span class="text-danger">*</span></label>
         <select class="form-select" [(ngModel)]="newProduct.categoryId">
           <option [ngValue]="0" disabled>-- Chọn danh mục --</option>
           <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
         </select>
-      </div>
-
-      <div class="col-md-4">
-        <label class="form-label fw-bold">Giá cơ bản (Hiển thị)</label>
-        <input type="number" class="form-control" [(ngModel)]="newProduct.basePrice" placeholder="0">
       </div>
 
       <div class="col-md-12">

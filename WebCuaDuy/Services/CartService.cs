@@ -35,29 +35,39 @@ namespace WebCuaDuy.Services
         // 2. Thêm vào giỏ
         public async Task AddToCartAsync(string userId, CartItem newItem)
         {
-            var cart = await GetCartAsync(userId);
+            // 1. Tạo Filter để tìm đúng User và đúng Sản phẩm trong giỏ (đúng SKU)
+            // Duy dùng Filter.Eq thay vì viết Lambda trực tiếp trong ElemMatch sẽ an toàn hơn
+            var filter = Builders<Cart>.Filter.And(
+                Builders<Cart>.Filter.Eq(c => c.UserId, userId),
+                Builders<Cart>.Filter.ElemMatch(c => c.Items,
+                    Builders<CartItem>.Filter.And(
+                        Builders<CartItem>.Filter.Eq(i => i.ProductId, newItem.ProductId),
+                        Builders<CartItem>.Filter.Eq(i => i.Sku, newItem.Sku)
+                    )
+                )
+            );
 
-            // Tìm xem món hàng này (cùng ProductID VÀ cùng SKU/Màu) đã có trong giỏ chưa
-            var existingItem = cart.Items
-                .FirstOrDefault(i => i.ProductId == newItem.ProductId && i.Sku == newItem.Sku);
+            var cart = await _cartCollection.Find(filter).FirstOrDefaultAsync();
 
-            if (existingItem != null)
+            if (cart != null)
             {
-                // Nếu có rồi thì cộng dồn số lượng
-                existingItem.Quantity += newItem.Quantity;
+                // 2. Nếu đã có: Dùng $inc để tăng số lượng (Items.$.Quantity nghĩa là phần tử vừa tìm thấy)
+                var update = Builders<Cart>.Update.Inc("Items.$.Quantity", newItem.Quantity)
+                                                  .Set(c => c.UpdatedAt, DateTime.UtcNow);
+                await _cartCollection.UpdateOneAsync(filter, update);
             }
             else
             {
-                // Nếu chưa có thì thêm mới vào danh sách
-                cart.Items.Add(newItem);
+                // 3. Nếu chưa có: Thêm mới vào mảng Items
+                // SỬA LỖI Ở ĐÂY: Tham số đầu tiên phải là filter tìm User
+                var userFilter = Builders<Cart>.Filter.Eq(c => c.UserId, userId);
+
+                var pushUpdate = Builders<Cart>.Update.Push(c => c.Items, newItem)
+                                                       .Set(c => c.UpdatedAt, DateTime.UtcNow);
+
+                await _cartCollection.UpdateOneAsync(userFilter, pushUpdate);
             }
-
-            cart.UpdatedAt = DateTime.UtcNow;
-
-            // Lưu đè lại vào MongoDB
-            await _cartCollection.ReplaceOneAsync(c => c.Id == cart.Id, cart);
         }
-
         // 3. Xóa sản phẩm khỏi giỏ
         public async Task RemoveFromCartAsync(string userId, string productId, string sku)
         {

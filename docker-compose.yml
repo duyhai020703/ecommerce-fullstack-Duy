@@ -1,0 +1,33 @@
+services:
+  # 1. Database MongoDB
+  db:
+    image: mongo:latest
+    container_name: mongodb_duy
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # 2. Backend .NET API
+  api:
+    build: ./WebCuaDuy # Trỏ đúng vào folder chứa code .NET của Duy
+    container_name: backend_api
+    ports:
+      - "7113:8080"
+    environment:
+      - MongoDB__ConnectionURI=mongodb://db:27017
+      - MongoDB__DatabaseName=WebCuaDuyDB
+    depends_on:
+      - db
+
+  # 3. Frontend Angular
+  web:
+    build: ./Client # Trỏ đúng vào folder chứa code Angular của Duy
+    container_name: angular_web
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:

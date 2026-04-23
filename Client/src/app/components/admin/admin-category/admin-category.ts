@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -16,14 +16,17 @@ export class AdminCategoryComponent implements OnInit {
   // 👇 Sửa PORT nếu cần
   apiUrl = 'https://localhost:7113/api/Category'; 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadCategories();
   }
 
   loadCategories() {
-    this.http.get<any[]>(this.apiUrl).subscribe(data => this.categories = data);
+    this.http.get<any[]>(this.apiUrl).subscribe(data => {this.categories = data;
+      this.cdr.detectChanges();
+  });
+   
   }
 
   addCategory() {

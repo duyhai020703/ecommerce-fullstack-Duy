@@ -1,0 +1,40 @@
+/* Loại bỏ gạch chân cho toàn bộ Link trong dự án nếu cần, hoặc chỉ trong Footer */
+a {
+    text-decoration: none !important;
+}
+
+/* Header Icons */
+.nav-icon {
+    color: #000 !important;
+    font-size: 1.3rem;
+    transition: 0.2s;
+}
+
+.nav-icon:hover {
+    opacity: 0.6;
+}
+
+/* Footer Links */
+.footer-links a {
+    color: #6c757d !important; /* Màu xám của Bootstrap secondary */
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ffffff !important;
+    padding-left: 5px; /* Hiệu ứng dịch chuyển nhẹ khi hover */
+}
+
+/* Tùy chỉnh input đăng ký tin cho chuyên nghiệp */
+.input-group input::placeholder {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+.input-group input:focus {
+    box-shadow: none;
+    border-color: #fff;
+    background-color: transparent !important;
+    color: #fff;
+}

@@ -23,6 +23,7 @@ builder.Services.AddSingleton<WebCuaDuy.Services.CategoryService>();
 builder.Services.AddSingleton<WebCuaDuy.Services.CartService>();
 // 1. Đăng ký UserService
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddHttpClient();
 
 // 2. Cấu hình xác thực JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -80,7 +81,6 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

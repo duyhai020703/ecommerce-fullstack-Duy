@@ -23,4 +23,9 @@
         public string FullName { get; set; }
         public string Role { get; set; }
     }
+    public class FacebookLoginRequest
+    {
+        // Tên thuộc tính này phải khớp với key bạn gửi từ Angular (token)
+        public string Token { get; set; } = string.Empty;
+    }
 }

@@ -23,5 +23,14 @@ namespace WebCuaDuy.Services
         // Hàm kiểm tra ID có tồn tại không (Dùng cho ProductService gọi)
         public async Task<bool> ExistsAsync(string id) =>
             await _categories.Find(c => c.Id == id).AnyAsync();
+        public async Task UpdateAsync(string id, Category updatedCategory) =>
+            await _categories.ReplaceOneAsync(c => c.Id == id, updatedCategory);
+        public async Task DeleteAsync(string id) =>
+            await _categories.DeleteOneAsync(c => c.Id == id);
+
+        // Nên có thêm hàm lấy 1 Category theo ID để dùng khi cần Edit
+        public async Task<Category?> GetByIdAsync(string id) =>
+            await _categories.Find(c => c.Id == id).FirstOrDefaultAsync();
+
     }
 }

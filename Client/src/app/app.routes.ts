@@ -5,10 +5,13 @@ import { HomeComponent } from './components/home/home';
 import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layout';
 import { AdminCategoryComponent } from './components/admin/admin-category/admin-category';
 import { AdminProductComponent } from './components/admin/admin-product/admin-product';
+import { CollectionsComponent } from './components/collections/collections';  
+import { ProductDetailComponent } from './components/product-detail/product-detail';
 export const routes: Routes = [
-  { path: '', component: HomeComponent }, // <--- Mặc định vào trang Home chứa tất cả các phần trên
   { path: 'login', component: LoginComponent },
   { path: 'shop', component: ProductListComponent }, // Trang danh sách sản phẩm riêng
+  {path:'collections',component: CollectionsComponent},
+  { path: 'product/:id', component: ProductDetailComponent },
   // Phải có đoạn này trong mảng routes:
 { 
     path: 'admin', 
@@ -22,6 +25,7 @@ export const routes: Routes = [
       { path: 'Category', component: AdminCategoryComponent }  // Link: /admin/categories
     ]
   },
+  { path: '', component: HomeComponent }, // <--- Mặc định vào trang Home chứa tất cả các phần trên
 
   // 3. Nếu gõ linh tinh thì về trang chủ
   { path: '**', redirectTo: '' }

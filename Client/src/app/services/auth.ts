@@ -29,4 +29,14 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+  // Trong auth.service.ts
+facebookLogin(fbToken: string): Observable<any> {
+  // Gửi object { token: fbToken } để khớp với FacebookLoginRequest bên Backend
+  return this.http.post<any>(`${this.apiUrl}/facebook-login`, { token: fbToken }).pipe(
+    tap(res => {
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('user', JSON.stringify(res));
+    })
+  );
+}
 }

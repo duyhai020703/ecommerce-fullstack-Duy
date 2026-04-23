@@ -13,7 +13,20 @@ namespace WebCuaDuy.Controllers
 
         [HttpGet]
         public async Task<List<Product>> Get() => await _service.GetAsync();
+        // Thêm vào trong class ProductController
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var product = await _service.GetByIdAsync(id);
+
+            if (product == null)
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm này." });
+            }
+
+            return Ok(product);
+        }
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {

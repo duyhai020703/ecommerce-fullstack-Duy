@@ -1,0 +1,74 @@
+<div class="container py-5" *ngIf="product">
+  <div class="row g-5">
+    
+    <div class="col-md-7">
+      <div class="row g-2">
+        <div class="col-12 mb-2" *ngFor="let img of [product.imageUrl]">
+          <img [src]="img" class="img-fluid w-100" alt="MLB Product">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="sticky-top" style="top: 100px;">
+        <p class="text-secondary small mb-1">MLB VIETNAM</p>
+        <h2 class="fw-bold text-uppercase mb-3">{{ product.name }}</h2>
+        
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <h3 class="fw-bold text-danger m-0">{{ product.variants?.[0]?.price | number }}đ</h3>
+          <span class="text-secondary text-decoration-line-through">1,590,000đ</span>
+        </div>
+
+        <hr>
+
+        <div class="size-selection mb-4">
+          <p class="fw-bold small mb-3">KÍCH THƯỚC: <span class="text-danger">{{ selectedSize }}</span></p>
+          <div class="d-flex flex-wrap gap-2">
+            <button *ngFor="let s of product.sizes" 
+                    (click)="selectSize(s)"
+                    [class.active]="selectedSize === s"
+                    class="btn btn-outline-dark size-btn">
+              {{ s }}
+            </button>
+          </div>
+        </div>
+
+        <div class="quantity-selection mb-4">
+          <p class="fw-bold small mb-3">SỐ LƯỢNG</p>
+          <div class="d-flex align-items-center border w-fit-content">
+            <button class="btn border-0 px-3" (click)="updateQuantity(-1)">-</button>
+            <span class="px-4 fw-bold">{{ quantity }}</span>
+            <button class="btn border-0 px-3" (click)="updateQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <div class="row g-2">
+          <div class="col-12">
+            <button class="btn btn-dark w-100 py-3 fw-bold rounded-0 mb-2">THÊM VÀO GIỎ HÀNG</button>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-danger w-100 py-3 fw-bold rounded-0">MUA NGAY</button>
+          </div>
+        </div>
+
+        <div class="mt-5 border-top pt-4">
+          <div class="accordion accordion-flush" id="productDesc">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#desc">
+                  MÔ TẢ SẢN PHẨM
+                </button>
+              </h2>
+              <div id="desc" class="accordion-collapse collapse">
+                <div class="accordion-body px-0 small text-secondary">
+                  Chất liệu cao cấp, co giãn tốt, phù hợp cho cả nam và nữ...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

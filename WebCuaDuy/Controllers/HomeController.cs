@@ -42,5 +42,18 @@ namespace WebCuaDuy.Controllers
                 return Unauthorized(new { message = ex.Message });
             }
         }
+        [HttpPost("facebook-login")]
+        public async Task<IActionResult> FacebookLogin([FromBody] FacebookLoginRequest request)
+        {
+            try
+            {
+                var result = await _userService.LoginWithFacebookAsync(request.Token);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

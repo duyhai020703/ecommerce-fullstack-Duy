@@ -2,63 +2,88 @@
   FREE SHIPPING TOÀN QUỐC CHO ĐƠN HÀNG TỪ 2.000.000Đ 🚀
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom py-3">
-  <div class="container-fluid px-4"> <a class="navbar-brand fs-2 fw-bold" href="#">
-      MLB <span class="text-secondary" style="font-size: 0.5em;">VIETNAM</span>
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom py-2">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold fs-3" href="#" style="letter-spacing: -1.5px; font-family: 'Arial Black', sans-serif;">
+      MLB <span class="text-secondary" style="font-size: 0.4em; vertical-align: middle;">VIETNAM</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <ul class="navbar-nav gap-4 fw-bold fs-5">
-        <li class="nav-item"><a class="nav-link" routerLink="/shop">Apparel</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/shop">Footwear</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/shop">Accessories</a></li>
-        <li class="nav-item"><a class="nav-link text-danger" routerLink="/shop">Sale</a></li>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold ms-lg-4" style="text-transform: uppercase; font-size: 0.85rem;">
+        <li class="nav-item"><a class="nav-link px-3 text-dark" routerLink="/collections"[queryParams]="{ category: 'giay' }">Giày dép</a></li>
+        <li class="nav-item"><a class="nav-link px-3 text-dark" routerLink="/collections" [queryParams]="{ category: 'quan-ao' }">Quần áo</a></li>
+        <li class="nav-item"><a class="nav-link px-3 text-dark" routerLink="/collections" [queryParams]="{ category: 'tui' }">Túi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 text-dark" routerLink="/collections" [queryParams]="{ category: 'phu-kien' }">Phụ kiện</a></li>
       </ul>
-    </div>
 
-    <div class="d-flex gap-3 align-items-center">
-      <a routerLink="/login" class="fs-4"><i class="bi bi-person"></i></a>
-      <a routerLink="/shop" class="fs-4 position-relative">
-        <i class="bi bi-bag"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">
-          2
-        </span>
-      </a>
+      <div class="d-flex gap-4 align-items-center header-icons">
+        <a href="javascript:void(0)" class="nav-icon text-dark"><i class="bi bi-search"></i></a>
+        
+        <a routerLink="/shop" class="nav-icon text-dark position-relative">
+          <i class="bi bi-bag"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 9px; padding: 3px 5px;">
+            0
+          </span>
+        </a>
+
+        <a routerLink="/login"  class="nav-icon text-dark"><i class="bi bi-heart"></i></a>
+        
+        <a routerLink="/login" class="nav-icon text-dark"><i class="bi bi-person"></i></a>
+
+        <div class="ms-1 fw-bold border-start ps-3 lang-switch" style="font-size: 0.75rem; cursor: pointer;">
+          <span class="text-dark">EN</span> / <span class="text-secondary">VI</span>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
 
-<router-outlet></router-outlet>
+<main style="min-height: 60vh;">
+  <router-outlet></router-outlet>
+</main>
 
 <footer class="bg-black text-white py-5 mt-5">
   <div class="container">
-    <div class="row g-4">
+    <div class="row g-4 border-bottom border-secondary pb-5">
       <div class="col-md-4">
-        <h4 class="mb-4">Về Chúng Tôi</h4>
-        <p class="text-secondary small">MLB Vietnam - Phong cách bóng chày Major League Baseball kết hợp thời trang đường phố.</p>
+        <h5 class="fw-bold mb-4 text-uppercase">Về Chúng Tôi</h5>
+        <p class="text-secondary small" style="line-height: 1.8;">
+          MLB Vietnam - Phong cách bóng chày Major League Baseball kết hợp thời trang đường phố năng động.
+        </p>
       </div>
-      <div class="col-md-4">
-        <h4 class="mb-4">Hỗ Trợ</h4>
-        <ul class="list-unstyled text-secondary">
-          <li class="mb-2"><a href="#">Chính sách đổi trả</a></li>
-          <li class="mb-2"><a href="#">Bảng size</a></li>
-          <li class="mb-2"><a href="#">Kiểm tra đơn hàng</a></li>
+
+      <div class="col-md-4 ps-md-5">
+        <h5 class="fw-bold mb-4 text-uppercase">Hỗ Trợ</h5>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="#" class="text-secondary">Chính sách đổi trả</a></li>
+          <li class="mb-2"><a href="#" class="text-secondary">Bảng size chuẩn</a></li>
+          <li class="mb-2"><a href="#" class="text-secondary">Hệ thống cửa hàng</a></li>
+          <li class="mb-2"><a href="#" class="text-secondary">Kiểm tra đơn hàng</a></li>
         </ul>
       </div>
+
       <div class="col-md-4">
-        <h4 class="mb-4">Đăng Ký Nhận Tin</h4>
-        <div class="input-group">
-          <input type="text" class="form-control rounded-0" placeholder="Email của bạn...">
-          <button class="btn btn-light rounded-0 fw-bold">GỬI</button>
+        <h5 class="fw-bold mb-4 text-uppercase">Đăng Ký Nhận Tin</h5>
+        <div class="input-group mb-3 mt-4">
+          <input type="email" class="form-control rounded-0 bg-transparent text-white border-secondary shadow-none" placeholder="Email của bạn...">
+          <button class="btn btn-light rounded-0 fw-bold px-4">GỬI</button>
         </div>
       </div>
     </div>
-    <div class="border-top border-secondary mt-4 pt-4 text-center text-secondary small">
-      © 2026 MLB Vietnam Clone by Duy. All rights reserved.
+
+    <div class="mt-4 d-flex justify-content-between align-items-center flex-wrap gap-3 footer-bottom">
+      <div class="text-secondary small">
+        © 2026 MLB Vietnam Clone by <strong>Duy</strong>.
+      </div>
+      <div class="d-flex gap-4 fs-5 text-secondary">
+        <a href="#" class="text-secondary"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-secondary"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-secondary"><i class="bi bi-tiktok"></i></a>
+      </div>
     </div>
   </div>
 </footer>

@@ -1,17 +1,22 @@
 <div class="product-card position-relative bg-white h-100">
-  <div class="img-box position-relative overflow-hidden">
-    <img [src]="product.imageUrl " class="w-100 h-100 object-fit-cover main-img" alt="{{product.name}}">
+  <div class="img-box position-relative overflow-hidden cursor-pointer" [routerLink]="['/product', product.id]">
+    <img [src]="product.imageUrl" class="w-100 h-100 object-fit-cover main-img" [alt]="product.name">
     
-    <button class="btn btn-dark w-100 position-absolute bottom-0 start-0 rounded-0 quick-add-btn">
+    <button class="btn btn-dark w-100 position-absolute bottom-0 start-0 rounded-0 quick-add-btn" 
+        (click)="$event.stopPropagation(); addToCart(product)">
       THÊM VÀO GIỎ
     </button>
   </div>
 
-  <div class="info mt-3 text-center">
-    <p class="text-secondary small mb-1 fw-bold">MLB KOREA</p>
-    <h6 class="fw-bold text-truncate">{{ product.name }}</h6>
+  <div class="info mt-3 text-center cursor-pointer" [routerLink]="['/product', product.id]">
+    <p class="text-secondary x-small mb-1 fw-bold">MLB KOREA</p>
+    <h6 class="fw-bold text-truncate px-2">{{ product.name }}</h6>
     <div class="d-flex justify-content-center gap-2">
-      <span class="fw-bold fs-5">{{ (product.price ? product.price : (product.variants?.[0]?.price)) | number }} ₫</span>
+      <span class="fw-bold text-dark">
+        {{ getMinPrice(product) | number }}₫
+      </span>
     </div>
   </div>
+
+  <app-quick-add #quickAddChild></app-quick-add>
 </div>
