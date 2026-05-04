@@ -1,4 +1,6 @@
 🚀 WebCuaDuy - E-Commerce Fullstack Project
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/c6546e10-a027-4015-987d-4ba34d280ad6" />
+
 🛠 Công nghệ sử dụng
 Frontend
 Framework: Angular 18+
@@ -21,8 +23,9 @@ Server: Nginx (phục vụ Frontend)
 
 Remote Access: Cloudflare Tunnel / Ngrok
 
-🏗 Cấu trúc thư mục
+## 🏗 Cấu trúc thư mục
 
+```text
 WebCuaDuy/
 ├── Client/             # Mã nguồn Frontend Angular
 │   ├── Dockerfile      # Build ảnh Angular + Nginx
@@ -31,6 +34,7 @@ WebCuaDuy/
 │   ├── Dockerfile      # Build ảnh .NET 8.0 Runtime
 │   └── ...
 └── docker-compose.yml  # File điều phối toàn bộ hệ thống
+```
 🚀 Hướng dẫn cài đặt nhanh
 Yêu cầu hệ thống
 Đã cài đặt Docker Desktop
