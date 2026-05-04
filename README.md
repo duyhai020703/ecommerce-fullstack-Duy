@@ -1,6 +1,7 @@
 🚀 WebCuaDuy - E-Commerce Fullstack Project
 <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/c6546e10-a027-4015-987d-4ba34d280ad6" />
-
+<img width="1893" height="919" alt="image" src="https://github.com/user-attachments/assets/74f5fce4-c944-40a4-a122-7b2f0c6d96a8" />
+<img width="1898" height="859" alt="image" src="https://github.com/user-attachments/assets/7fdb4acc-37cd-4ee9-a977-1cd147c633ab" />
 🛠 Công nghệ sử dụng
 Frontend
 Framework: Angular 18+
@@ -62,9 +63,6 @@ MongoDB: mongodb://localhost:27017
 🌐 Triển khai (Deployment)
 Dự án hỗ trợ triển khai từ xa không cần VPS thông qua Cloudflare Tunnel hoặc Ngrok.
 
-Frontend: Được tối ưu hóa chạy trên Nginx để đạt hiệu suất cao nhất.
 
-Database: Hỗ trợ kết nối MongoDB Atlas để lưu trữ.
-<img width="1893" height="919" alt="image" src="https://github.com/user-attachments/assets/74f5fce4-c944-40a4-a122-7b2f0c6d96a8" />
-<img width="1898" height="859" alt="image" src="https://github.com/user-attachments/assets/7fdb4acc-37cd-4ee9-a977-1cd147c633ab" />
+
 
