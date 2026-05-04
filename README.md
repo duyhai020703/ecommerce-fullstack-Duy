@@ -1,4 +1,4 @@
-🚀 WebCuaDuy - E-Commerce Fullstack Project
+##🚀 WebCuaDuy - E-Commerce Fullstack Project
 <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/c6546e10-a027-4015-987d-4ba34d280ad6" />
 <img width="1893" height="919" alt="image" src="https://github.com/user-attachments/assets/74f5fce4-c944-40a4-a122-7b2f0c6d96a8" />
 <img width="1898" height="859" alt="image" src="https://github.com/user-attachments/assets/7fdb4acc-37cd-4ee9-a977-1cd147c633ab" />
@@ -36,7 +36,7 @@ WebCuaDuy/
 │   └── ...
 └── docker-compose.yml  # File điều phối toàn bộ hệ thống
 ```
-🚀 Hướng dẫn cài đặt nhanh
+##🚀 Hướng dẫn cài đặt nhanh
 Yêu cầu hệ thống
 Đã cài đặt Docker Desktop
 
@@ -46,8 +46,8 @@ Các bước thực hiện
 Clone project về máy:
 
 Bash
-git clone https://github.com/nguyenhaiduy/WebCuaDuy.git
-cd WebCuaDuy
+git clone https://github.com/duyhai020703/ecommerce-fullstack-Duy.git
+cd ecommerce-fullstack-Duy
 Khởi động toàn bộ hệ thống bằng Docker:
 
 Bash
